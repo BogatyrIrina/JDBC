@@ -21,7 +21,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public Employee findById(int id)  {
-        try (PreparedStatement preparedStatement=connection.prepareStatement("SELECT *FROM employe WHERE id =?")){
+        try (PreparedStatement preparedStatement=connection.prepareStatement("SELECT * FROM employee WHERE id =?")){
             preparedStatement.setInt(1,id);
             preparedStatement.setMaxRows(1);
 
@@ -38,7 +38,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public void create(Employee employee) {
 
-        try (PreparedStatement preparedStatement= connection.prepareStatement("INSERT INTO employe(first_Name,last_Name, gender,age,city_Id)VALUES (?,?,?,?,?)")){
+        try (PreparedStatement preparedStatement= connection.prepareStatement("INSERT INTO employee(first_Name,last_Name, gender,age,city_Id)VALUES (?,?,?,?,?)")){
             preparedStatement.setInt(1,employee.getId());
             preparedStatement.setString(1, employee.getFirstName());
             preparedStatement.setString(2, employee.getLastName());
@@ -56,7 +56,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public void deleteById(Integer id) {
-        try (PreparedStatement preparedStatement= connection.prepareStatement("DELETE FROM employe WHERE id= (?)")){
+        try (PreparedStatement preparedStatement= connection.prepareStatement("DELETE FROM employee WHERE id= (?)")){
 
             preparedStatement.setInt(1,id);
 
@@ -70,7 +70,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public List<Employee> findAll() {
-        try (PreparedStatement preparedStatement=connection.prepareStatement("SELECT *FROM employee ")) {
+        try (PreparedStatement preparedStatement=connection.prepareStatement("SELECT * FROM employee ")) {
             ResultSet resultSet=preparedStatement.executeQuery();
             List<Employee> result = new ArrayList<>();
             while (resultSet.next()) {
