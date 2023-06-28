@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface EmployeeDao {
-    Employee findById(int id) throws SQLException;
-    void create(Employee employee);
-    void deleteById(Integer id);
-
-    List<Employee>findAll();
+    void save(Employee employee);
+    Employee findById(int id) ;
+    void update (Employee employee);
+    void deleteById(int id);
+    List<Employee> findAll();
 }

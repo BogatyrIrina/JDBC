@@ -1,24 +1,35 @@
+import dao.EmployeeDao;
 import dao.EmployeeDaoImpl;
 
 
+
 import java.sql.*;
+import model.Employee;
 
 public class Application {
-    public Application() {
-    }
+    public static void main(String[] args) {
+        EmployeeDao employeeDao = new EmployeeDaoImpl();
+        Employee employee = new Employee();
 
-    public static void main(String[] args) throws SQLException {
-        String url = "jdbc:postgresql://localhost:5432/postgres";
-        String user = "postgres";
-        String password = "postgres";
+        employee.setFirst_Name("Kim");
+        employee.setLast_Name("Iven");
+        employee.setGender("man");
+        employee.setAge(31);
+        employee.setCity_Id(2);
+        System.out.println(employee);
+        employeeDao.save(employee);
+        System.out.println(employee);
 
-        Connection conn = DriverManager.getConnection(url, user, password);
-        EmployeeDaoImpl employeeDao = new EmployeeDaoImpl(conn);//создание экземпляра класса PostDaoImpl и в конструкор передается connection
-        System.out.println(employeeDao.findById(5));
+        System.out.println(employeeDao.findById(21));
+        employeeDao.deleteById((21));
+        System.out.println(employeeDao.findById(21));
 
-        System.out.println(employeeDao.findById(9));
+        Employee byId=employeeDao.findById(20);
+        byId.setFirst_Name("Jack");
+        byId.setLast_Name("Fill");
+        employeeDao.update(byId);
+        System.out.println(employeeDao.findById(20));
 
         employeeDao.findAll().forEach(System.out::println);
-        //для пулл
     }
 }
